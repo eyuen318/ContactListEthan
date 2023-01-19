@@ -8,12 +8,16 @@
  * @author: Ms. Namasivayam & Mr. Blick
  * @version: 2022-2023
  */
+import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class ContactList
 {
     // TODO: Create your array contacts
-
+    ArrayList<Person> contacts = new ArrayList<Person>();
     // TODO: Write a Constructor
+
 
     public void printMenuOptions() {
         System.out.println("Menu: ");
@@ -34,6 +38,37 @@ public class ContactList
      */
     public void addContact() {
         // TODO: Complete the addContact method
+        Scanner s  = new Scanner(System.in);
+        int input = s.nextInt();
+        if (input == 1) {
+            System.out.println("Select a type of contact to add:\n1. Student\n2. Teacher");
+            int typeContact = s.nextInt();
+            s.nextLine();
+            if (typeContact == 1) {
+                System.out.println("First Name:");
+                String fN = s.nextLine();
+                System.out.println("Last Name:");
+                String lN = s.nextLine();
+                System.out.println("Phone Number:");
+                String pN = s.nextLine();
+                System.out.println("Grade:");
+                int grade = s.nextInt();
+                contacts.add(new Student(fN, lN, pN, grade));
+
+            }
+            else if(typeContact == 2) {
+                System.out.println("First Name:");
+                String fN = s.nextLine();
+                System.out.println("Last Name:");
+                String lN = s.nextLine();
+                System.out.println("Phone Number:");
+                String pN = s.nextLine();
+                System.out.println("Subject:");
+                String subject = s.nextLine();
+                contacts.add(new Athlete(fN, lN, pN, subject));
+
+            }
+        }
     }
 
     /**
@@ -53,6 +88,7 @@ public class ContactList
     }
 
     // TODO: Write searchByFirstName
+
 
     // TODO: Write searchByLastName
 

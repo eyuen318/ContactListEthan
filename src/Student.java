@@ -9,4 +9,20 @@
 
 public class Student {
     // TODO: Modify and complete this class
+    private int grade;
+
+    public Student(int grade, String firstName, String lastName, String phoneNumber) {
+        super(String firstName, String lastName, String phoneNumber);
+        this.grade = grade;
+
+        public int getGrade() {
+            return grade;
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " Grade: " + grade;
+        }
+
+    }
 }
