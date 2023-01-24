@@ -1,13 +1,13 @@
 public class Athlete extends Person{
 
     private String sport;
-    public Athlete(String sport, String firstName, String lastName, String phoneNumber)
+    public Athlete(String firstName, String lastName, String phoneNumber, String sport)
     {
-        super(String firstName, String lastName, String phoneNumber);
+        super(firstName, lastName, phoneNumber);
         this.sport = sport;
     }
 
-    public int getSport() {
+    public String getSport() {
         return sport;
     }
     @Override

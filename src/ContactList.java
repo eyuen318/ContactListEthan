@@ -15,9 +15,11 @@ import java.util.ArrayList;
 public class ContactList
 {
     // TODO: Create your array contacts
-    ArrayList<Person> contacts = new ArrayList<Person>();
+    private ArrayList<Person> contacts;
     // TODO: Write a Constructor
-
+    public ContactList() {
+        contacts = new ArrayList<Person>();
+    }
 
     public void printMenuOptions() {
         System.out.println("Menu: ");
@@ -36,38 +38,32 @@ public class ContactList
      * Asks user for input to create and add a new Person
      * to the contact list
      */
-    public void addContact() {
+    public void addContact(Scanner s) {
         // TODO: Complete the addContact method
-        Scanner s  = new Scanner(System.in);
-        int input = s.nextInt();
-        if (input == 1) {
-            System.out.println("Select a type of contact to add:\n1. Student\n2. Teacher");
-            int typeContact = s.nextInt();
-            s.nextLine();
-            if (typeContact == 1) {
-                System.out.println("First Name:");
-                String fN = s.nextLine();
-                System.out.println("Last Name:");
-                String lN = s.nextLine();
-                System.out.println("Phone Number:");
-                String pN = s.nextLine();
-                System.out.println("Grade:");
-                int grade = s.nextInt();
-                contacts.add(new Student(fN, lN, pN, grade));
-
-            }
-            else if(typeContact == 2) {
-                System.out.println("First Name:");
-                String fN = s.nextLine();
-                System.out.println("Last Name:");
-                String lN = s.nextLine();
-                System.out.println("Phone Number:");
-                String pN = s.nextLine();
-                System.out.println("Subject:");
-                String subject = s.nextLine();
-                contacts.add(new Athlete(fN, lN, pN, subject));
-
-            }
+        System.out.println("Select a type of contact to add:\n1. Student\n2. Athlete");
+        int typeContact = s.nextInt();
+        s.nextLine();
+        if (typeContact == 1) {
+            System.out.println("First Name:");
+            String fN = s.nextLine();
+            System.out.println("Last Name:");
+            String lN = s.nextLine();
+            System.out.println("Phone Number:");
+            String pN = s.nextLine();
+            System.out.println("Grade:");
+            int grade = s.nextInt();
+            contacts.add(new Student(fN, lN, pN, grade));
+        }
+        else if(typeContact == 2) {
+            System.out.println("First Name:");
+            String fN = s.nextLine();
+            System.out.println("Last Name:");
+            String lN = s.nextLine();
+            System.out.println("Phone Number:");
+            String pN = s.nextLine();
+            System.out.println("Sport:");
+            String sport = s.nextLine();
+            contacts.add(new Athlete(fN, lN, pN, sport));
         }
     }
 
@@ -76,6 +72,11 @@ public class ContactList
      */
     public void printContacts() {
         // TODO: Complete the printContacts method
+        for (Person contact : contacts)
+        {
+            System.out.println(contact);
+        }
+
     }
 
     /**
@@ -85,20 +86,76 @@ public class ContactList
      */
     public void sort(int sortBy) {
         // TODO: Complete the sort method
+        int n = contacts.size();
+        switch(sortBy) {
+            case 0://first name
+                for (int i = 0; i < n - 1; i++) {
+                    for (int j = 0; j < n - i - 1; j++) {
+                        if (contacts.get(j+1).getFirstName().compareTo(contacts.get(j).getFirstName()) < 0) { //arr[j] > arr[j + 1]
+                            //s1 < s2, it returns negative number
+                            // swap arr[j+1] and arr[j]
+                            Person temp = contacts.get(j);
+                            contacts.set(j, contacts.get(j + 1));
+                            contacts.set(j + 1, temp);
+                        }
+                    }
+                }
+                break;
+            case 1://last name
+                for (int i = 0; i < n - 1; i++) {
+                    for (int j = 0; j < n - i - 1; j++) {
+                        if (contacts.get(j+1).getLastName().compareTo(contacts.get(j).getLastName()) < 0) { //arr[j] > arr[j + 1]
+                            //s1 < s2, it returns negative number
+                            //swap arr[j+1] and arr[j]
+                            Person temp = contacts.get(j);
+                            contacts.set(j, contacts.get(j + 1));
+                            contacts.set(j + 1, temp);
+                        }
+                    }
+                }
+                break;
+            case 2://phone number
+                for (int i = 0; i < n - 1; i++) {
+                    for (int j = 0; j < n - i - 1; j++) {
+                        if (contacts.get(j+1).getPhoneNumber().compareTo(contacts.get(j).getPhoneNumber()) < 0) { //arr[j] > arr[j + 1]
+                            //s1 < s2, it returns negative number
+                            //swap arr[j+1] and arr[j]
+                            Person temp = contacts.get(j);
+                            contacts.set(j, contacts.get(j + 1));
+                            contacts.set(j + 1, temp);
+                        }
+                    }
+                }
+                break;
+
+        }
     }
 
     // TODO: Write searchByFirstName
+    public void searchByFirstName(String firstName){
 
+    }
 
     // TODO: Write searchByLastName
+    public void searchByLastName(){
 
+    }
     // TODO: Write searchByPhoneNumber
+    public void searchByPhoneNumber(){
 
+    }
     /**
      * Lists just the Student objects in the Contact List
      */
     public void listStudents() {
         // TODO: Complete the listStudents method
+        for (Person contact : contacts)
+        {
+            if (contact instanceof Student)
+            {
+                System.out.println(contact);
+            }
+        }
     }
 
     /**
@@ -108,9 +165,44 @@ public class ContactList
     public void run() {
         System.out.println("Welcome to your Contacts List");
         System.out.println("Please pick from the following menu options");
-        printMenuOptions();
+        Scanner scan = new Scanner(System.in);
+
 
         // TODO: Complete the run method
+        while(true){
+            printMenuOptions();
+            int input = scan.nextInt();
+            switch(input) {
+                case 1:
+                    addContact(scan);
+                    break;
+                case 2:
+                    sort(0);
+                    printContacts();
+                    break;
+                case 3:
+                    sort(1);
+                    printContacts();;
+                    break;
+                case 4:
+                    sort(2);
+                    printContacts();
+                    break;
+                case 5:
+                    listStudents();
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 0:
+                    scan.close();
+                    System.out.println("exiting");
+                    return;
+                }
+        }
     }
 
 
