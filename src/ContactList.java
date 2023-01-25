@@ -5,7 +5,7 @@
  *
  * Created for Menlo School CS2
  *
- * @author: Ms. Namasivayam & Mr. Blick
+ * @author: Ms. Namasivayam & Mr. Blick & Ethan Yuen
  * @version: 2022-2023
  */
 import java.util.Scanner;
@@ -133,15 +133,38 @@ public class ContactList
 
     // TODO: Write searchByFirstName
     public void searchByFirstName(String firstName){
-
+        for (Person contact : contacts)
+        {
+            if (contact.getFirstName().equals(firstName)) {
+                System.out.println(contact);
+                return;
+            }
+        }
+        System.out.println(firstName + " is not in the list.");
     }
 
     // TODO: Write searchByLastName
-    public void searchByLastName(){
+    public void searchByLastName(String lastName){
+        for (Person contact : contacts)
+        {
+            if (contact.getLastName().equals(lastName)) {
+                System.out.println(contact);
+                return;
+            }
+        }
+        System.out.println(lastName + " is not in the list.");
 
     }
     // TODO: Write searchByPhoneNumber
-    public void searchByPhoneNumber(){
+    public void searchByPhoneNumber(String phoneNumber){
+        for (Person contact : contacts)
+        {
+            if (contact.getPhoneNumber().equals(phoneNumber)) {
+                System.out.println(contact);
+                return;
+            }
+        }
+        System.out.println(phoneNumber + " is not a phone number in the list.");
 
     }
     /**
@@ -172,6 +195,8 @@ public class ContactList
         while(true){
             printMenuOptions();
             int input = scan.nextInt();
+            scan.nextLine();
+            String inputS;
             switch(input) {
                 case 1:
                     addContact(scan);
@@ -192,10 +217,19 @@ public class ContactList
                     listStudents();
                     break;
                 case 6:
+                    System.out.println("Enter a first name: ");
+                    inputS = scan.nextLine();
+                    searchByFirstName(inputS);
                     break;
                 case 7:
+                    System.out.println("Enter a last name: ");
+                    inputS = scan.nextLine();
+                    searchByLastName(inputS);
                     break;
                 case 8:
+                    System.out.println("Enter a phone number: ");
+                    inputS = scan.nextLine();
+                    searchByPhoneNumber(inputS);
                     break;
                 case 0:
                     scan.close();
